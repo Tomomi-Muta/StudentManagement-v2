@@ -14,13 +14,12 @@ public class Application {
   private String age ="27";
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(Application.class, args);
 	}
 
-
 @GetMapping("/studentInfo")
 public String studentInfo() {
+
 	return name + " " + age + "歳";
  }
 
