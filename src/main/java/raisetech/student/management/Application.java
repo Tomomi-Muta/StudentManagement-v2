@@ -25,6 +25,7 @@ public class Application {
 @GetMapping("/student")
 public String getStudent(@RequestParam String name) {
 	 Student student = repository.searchByName(name);
+	System.out.println("テスト");
 	return student.getName() + " " + student.getAge()+ "歳";
  }
 
