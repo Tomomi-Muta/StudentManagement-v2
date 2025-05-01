@@ -26,6 +26,7 @@ public class Application {
 public String getStudent(@RequestParam String name) {
 	 Student student = repository.searchByName(name);
 	System.out.println("テスト");
+	System.out.println("むたさん");
 	return student.getName() + " " + student.getAge()+ "歳";
  }
 
