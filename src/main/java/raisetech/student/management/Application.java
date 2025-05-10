@@ -19,9 +19,14 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping("/student")
+	@GetMapping("/studentList")
 	public List<Student> getStudentList(){
-		return repository.search();
+		return repository.searchStudent();
+	}
+
+	@GetMapping("/StudentCourseList")
+	public List<StudentCourse>   getStudentCourseList() {
+		return repository.searchStudentCourses();
 	}
 }
 
