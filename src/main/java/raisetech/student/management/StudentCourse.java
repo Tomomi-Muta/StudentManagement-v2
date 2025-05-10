@@ -14,4 +14,5 @@ public class StudentCourse {
     private String studentId;  // 学生ID（このコースを受講する学生）
 
 
+
 }
