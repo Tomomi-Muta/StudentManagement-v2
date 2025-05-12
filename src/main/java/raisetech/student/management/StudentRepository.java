@@ -14,5 +14,4 @@ public interface StudentRepository {
   //学生が受講しているコースを取得する
   @Select("SELECT * FROM students_courses")
   List<StudentCourse>  searchStudentCourses();
-
 }
