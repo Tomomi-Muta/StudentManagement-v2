@@ -25,7 +25,13 @@ public class StudentConverter {
       studentDetail.setStudentCourses(convertStudentCourses);
       studentDetails.add(studentDetail);
     });
+
     return studentDetails;
   }
 
+  public Student toStudent(StudentDetail studentDetail) {
+    return studentDetail.getStudent();
+
+  }
 }
+
