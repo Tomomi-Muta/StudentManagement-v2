@@ -55,8 +55,7 @@ public String registerStudent(@ModelAttribute StudentDetail studentDetail, Bindi
   }
 
   // 新規受講生情報を登録する処理を追加
-  Student student = converter.toStudent(studentDetail); // StudentDetail から Student に変換
-  service.saveStudent(student);                         // 保存処理を呼び出す
+  service.registerStudent(studentDetail);
 
   return "redirect:/studentList";
 }
