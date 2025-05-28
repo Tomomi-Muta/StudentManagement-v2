@@ -1,8 +1,7 @@
 package raisetech.student.management.controler;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import raisetech.student.management.controler.converter.StudentConverter;
 import raisetech.student.management.data.Student;
-import raisetech.student.management.data.StudentCourse;
+import raisetech.student.management.data.StudentsCourses;
 import raisetech.student.management.domain.StudentDetail;
 import raisetech.student.management.service.StudentService;
 
@@ -32,19 +30,21 @@ public class StudentController {
   @GetMapping("/studentList")
   public String getStudentList(Model model) {
     List<Student> students = service.searchStudentList();
-    List<StudentCourse> studentCourses = service.searchStudentCourseList();
+    List<StudentsCourses> studentCours = service.searchStudentCourseList();
 
-    model.addAttribute("studentList", converter.convertStudentDetails(students,studentCourses));
+    model.addAttribute("studentList", converter.convertStudentDetails(students, studentCours));
     return "studentList";
   }
 
   @GetMapping("/StudentCourseList")
-  public List<StudentCourse> getStudentCourseList() {
+  public List<StudentsCourses> getStudentCourseList() {
     return service.searchStudentCourseList();
   }
   @GetMapping("/newStudent")
   public  String newStudent(Model model){
-    model.addAttribute("studentDetail",new StudentDetail());
+    StudentDetail studentDetail = new StudentDetail();
+    studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
+    model.addAttribute("studentDetail",studentDetail);
     return "registerStudent";
   }
 
@@ -53,11 +53,8 @@ public String registerStudent(@ModelAttribute StudentDetail studentDetail, Bindi
   if(result.hasErrors()){
     return "registerStudent";
   }
-
   // 新規受講生情報を登録する処理を追加
-  Student student = converter.toStudent(studentDetail); // StudentDetail から Student に変換
-  service.saveStudent(student);                         // 保存処理を呼び出す
-
+  service.registerStudent(studentDetail);
   return "redirect:/studentList";
 }
 
