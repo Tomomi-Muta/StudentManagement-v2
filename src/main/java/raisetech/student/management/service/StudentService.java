@@ -21,9 +21,12 @@ public class StudentService {
     return repository.searchStudent();
   }
 
-  public List<StudentCourse>   searchStudentCourseList() {
+  public List<StudentCourse> searchStudentCourseList() {
     return repository.searchStudentCourses();
+  }
+  public void saveStudent(Student student) {
+    repository.insertStudent(student);
+  }
   }
 
 
-}
