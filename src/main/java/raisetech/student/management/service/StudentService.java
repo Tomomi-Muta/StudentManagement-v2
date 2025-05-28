@@ -1,11 +1,12 @@
 package raisetech.student.management.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import raisetech.student.management.data.Student;
-import raisetech.student.management.data.StudentCourse;
+import raisetech.student.management.data.StudentsCourses;
 import raisetech.student.management.domain.StudentDetail;
 import raisetech.student.management.repository.StudentRepository;
 
@@ -23,7 +24,7 @@ public class StudentService {
     return repository.searchStudent();
   }
 
-  public List<StudentCourse> searchStudentCourseList() {
+  public List<StudentsCourses> searchStudentCourseList() {
     return repository.searchStudentCourses();
   }
 
@@ -31,6 +32,12 @@ public class StudentService {
   public void registerStudent(StudentDetail studentDetail) {
     repository.registerStudent(studentDetail.getStudent());
     //TODO：コース情報登録も行う
+    for(StudentsCourses studentsCourse:studentDetail.getStudentsCourses()){
+     studentsCourse.setStudentId(studentDetail.getStudent().getId());
+     studentsCourse.setCourseStartAt(LocalDateTime.now());
+     studentsCourse.setCourseEndAt(LocalDateTime.now().plusYears(1));
+     repository.registerStudentsCourses(studentsCourse);
+    }
    }
   }
 
