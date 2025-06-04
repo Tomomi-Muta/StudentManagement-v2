@@ -19,5 +19,5 @@ public class Student {
   private String remark;
   private boolean isDeleted;
 
-  private List<StudentsCourses> studentsCourses;
+  private List<StudentCourse> studentsCours;
 }
